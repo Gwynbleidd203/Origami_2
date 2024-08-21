@@ -159,7 +159,7 @@ class ResizePDF:
 
                     document_name = doc["path"]
 
-                file.write(f'{document_name}\n')
+                file.write(f'{document_name}/n')
         
 
     def read_order_from_file(self) -> List[str]:
@@ -248,7 +248,7 @@ class ResizePDF:
             tuple[float, float]: A tuple containing the converted width and height in points.
         """
 
-        print('Antes', (self.__formats[self.__desired_format][0] * self.__MEASEURE_POINTS, self.__formats[self.__desired_format][1] * self.__MEASEURE_POINTS))
+        #print('Antes', (self.__formats[self.__desired_format][0] * self.__MEASEURE_POINTS, self.__formats[self.__desired_format][1] * self.__MEASEURE_POINTS))
 
         final_width = round(
             self.__formats[self.__desired_format][0] * self.__MEASEURE_POINTS, 3
@@ -258,33 +258,26 @@ class ResizePDF:
             self.__formats[self.__desired_format][1] * self.__MEASEURE_POINTS, 3
         )
         
-        print('Depois', (final_width, final_height))
+        #print('Depois', (final_width, final_height))
 
         return (final_width, final_height)
     
 
     def get_scale_factor(self, original_dimension: tuple[float, float]) -> tuple[float, float]:
         """
-            Calculate a scale factor for the current page width and height to fit in the desired format.
+        Calculate the scale factors for resizing a PDF page to fit within the desired format.
 
-            Args:
+        Args:
+            original_dimension (tuple[float, float]): The width and height of the original PDF page.
 
-                Original dimensions(width and height) from the current page.
-
-            Returns:
-
-                A tuple with the scale factor for x and y axis.
+        Returns:
+            tuple[float, float]: The scale factors for the width and height axes.
         """
 
-        scale_factor_w = self.__desired_dimensions[0] / original_dimension[0]
-        scale_factor_y = self.__desired_dimensions[1] / original_dimension[1]
+        width_scale_factor = self.__desired_dimensions[0] / original_dimension[0]
+        height_scale_factor = self.__desired_dimensions[1] / original_dimension[1]
 
-        scale_factor = (
-            scale_factor_w, 
-            scale_factor_y
-        )
-
-        #print(scale_factor)
+        scale_factor = (width_scale_factor, height_scale_factor)
 
         return scale_factor
 
@@ -328,7 +321,7 @@ class ResizePDF:
 
                     if original_dimension == self.__desired_dimensions:
 
-                        print(f'{bcolors.OKCYAN} Page {page_number + 1} already matches the desired size, skipping.')
+                        #print(f'{bcolors.OKCYAN} Page {page_number + 1} already matches the desired size, skipping.')
                         
                         writer.add_page(page)
 
@@ -506,18 +499,18 @@ class ResizePDF:
 
 
 resizer = ResizePDF(
-    'J:/arquivos_digitalizados/licenciatura_em_educacao_fisica/em_andamento/licenciatura_em_educacao_fisica_2015(2)/',
-    'J:/arquivos_digitalizados/licenciatura_em_educacao_fisica/finalizados/licenciatura_em_educacao_fisica_2015(2)/',
+    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/em_andamento/bacharelado_em_educacao_fisica_2018(1)/',
+    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/finalizados/bacharelado_em_educacao_fisica_2018(1)/',
     "A4",
     order_by="name",
     use_custom_order=True
 )
 
-#resizer.mm_to_point_transformation()
 
-#resizer.retrieve_pdfs_per_folder()
+# resizer.retrieve_pdfs_per_folder()
 
-#resizer.resize() """
+# resizer.resize()
 
 resizer.resize_using_custom_order()
-resizer.generate_report()
+
+# resizer.generate_report()
