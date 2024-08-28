@@ -159,7 +159,7 @@ class ResizePDF:
 
                     document_name = doc["path"]
 
-                file.write(f'{document_name}/n')
+                file.write(f'{document_name}\n')
         
 
     def read_order_from_file(self) -> List[str]:
@@ -499,18 +499,17 @@ class ResizePDF:
 
 
 resizer = ResizePDF(
-    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/em_andamento/bacharelado_em_educacao_fisica_2018(1)/',
-    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/finalizados/bacharelado_em_educacao_fisica_2018(1)/',
+    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/em_andamento/bacharelado_em_educacao_fisica_2018(2)/',
+    'J:/arquivos_digitalizados/bacharelado_em_educacao_fisica/finalizados/bacharelado_em_educacao_fisica_2018(2)/',
     "A4",
     order_by="name",
     use_custom_order=True
 )
 
-
-# resizer.retrieve_pdfs_per_folder()
+resizer.retrieve_pdfs_per_folder()
 
 # resizer.resize()
 
-resizer.resize_using_custom_order()
+# resizer.resize_using_custom_order()
 
 # resizer.generate_report()
